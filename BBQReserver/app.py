@@ -6,7 +6,7 @@ from handler import base, keyboardHandler
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
-updater = Updater(token='976212417:AAGFR9gjY6C3l5KbIixps3mVojaFCq-sL7s', use_context=True)
+updater = Updater(token=, use_context=True)
 dispatcher = updater.dispatcher
 
 start_handler = CommandHandler('start', base.start)
