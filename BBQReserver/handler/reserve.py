@@ -52,7 +52,7 @@ def choose_month(update, context):
 
 
 def choose_day(update, context):
-    if re.match('\d', update.message.text) is not None:
+    if re.match('\d\d$|\d$', update.message.text) is not None:
         day = int(update.message.text)
         if 0 < day <= calendar.monthrange(2019, userState[update.message.chat.id]['month'])[1]:
             userState[update.message.chat.id]['day'] = day
