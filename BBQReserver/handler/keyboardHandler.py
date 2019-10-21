@@ -1,5 +1,5 @@
 from handler.base import cancel, unknown
-from handler.cancel import cancel_reservation
+from handler.cancel import cancel_reservation, delete_reservation
 from handler.reserve import reserve, choose_month, choose_day, choose_hour, userState
 from handler.view import view_reservations
 
@@ -23,12 +23,17 @@ def keyboard_handler(update, context):
                 cancel(update, context)
                 return
 
+        elif userState[update.message.chat.id]['state'] == 'cancel':
+            delete_reservation(update,context)
+
+
     if update.message.text == '🖊 Reserve':
         reserve(update, context)
         userState[update.message.chat.id] = {}
         userState[update.message.chat.id]['state'] = 'month'
     elif update.message.text == '🗑 Cancel reservation':
         cancel_reservation(update, context)
+        userState[update.message.chat.id]['state'] = 'cancel'
     elif update.message.text == '📖 View reservations':
         view_reservations(update, context)
     else:
