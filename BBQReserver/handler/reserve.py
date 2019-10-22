@@ -1,9 +1,10 @@
 import re
 
+from datetime import date
 from telegram import ReplyKeyboardMarkup
 import calendar
 
-
+from database import Reservation, sess
 
 userState = {}
 
@@ -18,10 +19,8 @@ DAYS = [['1', '2', '3', '4', '5', '6', '7'],
         ['22', '23', '24', '25', '26', '27', '28'],
         ['29', '30', '31']]
 
-HOURS = [['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
-         ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00'],
-         ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
-         ['18:00', '19:00', '20:00', '21:00', '22:00', '23:00']]
+HOURS = [['08:00', '10:00', '12:00', '14:00'],
+         ['16:00', '18:00', '21:00'], ]
 
 MAX_DAYS = 31
 
@@ -38,7 +37,7 @@ def choose_month(update, context):
     while i < len(MONTHS):
         if update.message.text in MONTHS[i]:
             reply_keyboard = DAYS
-            userState[update.message.chat.id]['month'] =  i * 3 + MONTHS[i].index(update.message.text) + 1
+            userState[update.message.chat.id]['month'] = i * 3 + MONTHS[i].index(update.message.text) + 1
             num = MAX_DAYS - calendar.monthrange(2019, userState[update.message.chat.id]['month'])[1]
             print(num)
             for j in range(num):
@@ -60,10 +59,41 @@ def choose_day(update, context):
             update.message.reply_text(
                 'Choose the hour, you want to reserve.',
                 reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True))
+            reserves = sess.query(Reservation).filter_by(day=date(2019,
+                                                                  int(userState[update.message.chat.id]['month']),
+                                                                  int(userState[update.message.chat.id]['day'])))
+            reserved = 'This hours are already reserved.\n'
+
+            for res in reserves:
+                print(res.slot, res.day)
+                reserved += res.slot + '\n'
+            update.message.reply_text(
+                reserved)
             return True
     return False
 
+
 def choose_hour(update, context):
-    print('hour')
-    userState[update.message.chat.id] = {}
-    return True
+    i = 0
+    while i < len(HOURS):
+
+        if update.message.text in HOURS[i]:
+            check = sess.query(Reservation).filter_by(day=date(2019,
+                                                               int(userState[update.message.chat.id]['month']),
+                                                               int(userState[update.message.chat.id]['day'])),
+                                                      slot=update.message.text).first()
+            if check is None:
+                res = Reservation(user_id=update.message.chat.id,
+                                  day=date(2019,
+                                           int(userState[update.message.chat.id]['month']),
+                                           int(userState[update.message.chat.id]['day'])),
+                                  slot=update.message.text)
+                sess.add(res)
+                sess.commit()
+                userState[update.message.chat.id] = {}
+                return True
+            else:
+                update.message.reply_text(
+                    'This hour is already reserved.')
+                return False
+    return False

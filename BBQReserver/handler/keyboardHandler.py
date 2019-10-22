@@ -24,8 +24,8 @@ def keyboard_handler(update, context):
                 return
 
         elif userState[update.message.chat.id]['state'] == 'cancel':
-            delete_reservation(update,context)
-
+            delete_reservation(update, context)
+            return
 
     if update.message.text == '🖊 Reserve':
         reserve(update, context)

@@ -1,16 +1,19 @@
-from sqlalchemy import create_engine, Column, Date, Boolean, Integer, String, Text, ForeignKey
+from sqlalchemy import create_engine, Column, Date, Boolean, Integer, String, Text, ForeignKey, Index, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
 
 print(1)
+Session = sessionmaker()
 # Create SQLite db or use existing one
 engine = create_engine('sqlite:///sqlite3.db')
 # Create a base for the models to build upon.
+Session.configure(bind=engine)
 Base = declarative_base()
+sess = Session()
 
 
 class User(Base):
     __tablename__ = 'user'
-
     id_ = Column(Integer, primary_key=True)
     telegramID = Column(String, nullable=False)
 
@@ -19,7 +22,7 @@ class Message(Base):
     """
     Message to send via telegram 
     """
-    
+
     __tablename__ = 'message'
 
     id_ = Column(Integer, primary_key=True)
@@ -27,7 +30,7 @@ class Message(Base):
     text = Column(Text(), nullable=False)
     # Boolean field because I haven't found different statuses 
     # in Telegram API so far, like "recievied" or "has been read"
-    is_sent = Column(Boolean(),  default=False)
+    is_sent = Column(Boolean(), default=False)
 
 
 # class Notification(Message):
@@ -45,7 +48,6 @@ ts_14_16 = '14:00-16:00'
 ts_16_18 = '16:00-18:00'
 ts_18_21 = '18:00-21:00'
 ts_21_24 = '21:00-00:00'
-
 
 TIME_SLOTS = (
     8, ts_08_10,
@@ -71,11 +73,12 @@ class Reservation(Base):
     day = Column(Date(), nullable=False)
     # We'll put either of 8, 10, 12, 14, 16, 18, 21 here
     slot = Column(Integer, nullable=False)
+    unique_reserve = (UniqueConstraint('day', 'slot', name='_unique_reservation_'))
 
 
-class  WaitingList(Base):
+class WaitingList(Base):
     """
-    List of users waiting for a slot in a particalar date to be free
+    List of users waiting for a slot in a particular date to be free
     """
 
     __tablename__ = 'waiting_list'
@@ -87,5 +90,6 @@ class  WaitingList(Base):
 
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.
+
 Base.metadata.create_all(engine)
 print(0)
