@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4413192a-fd53-438f-ac58-f6bcb9a8d513" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/handler/configs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/cancel.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/cancel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/keyboardHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/keyboardHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/reserve.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/reserve.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/view.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqlite3.db" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite3.db" afterDir="false" />
-    </list>
+    <list default="true" id="4413192a-fd53-438f-ac58-f6bcb9a8d513" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler/reserve.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="89" column="115" selection-start-line="89" selection-start-column="115" selection-end-line="89" selection-end-column="115" />
+            <state relative-caret-position="240">
+              <caret line="25" selection-start-line="23" selection-end-line="25" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -122,19 +113,10 @@
         <entry file="file://$PROJECT_DIR$/handler/view.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+              <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handler/configs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -143,21 +125,9 @@
         <entry file="file://$PROJECT_DIR$/handler/keyboardHandler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
-              <caret line="37" column="42" lean-forward="true" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+              <caret line="37" column="42" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calendar_upd.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-              <folding>
-                <marker date="1571823111837" expanded="true" signature="1:1297" ph="..." />
               </folding>
             </state>
           </provider>
@@ -383,23 +353,22 @@
       <workItem from="1571762184006" duration="4078000" />
       <workItem from="1571818563042" duration="2379000" />
       <workItem from="1571820964521" duration="1571000" />
-      <workItem from="1571822556829" duration="5160000" />
+      <workItem from="1571822556829" duration="5412000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24397000" />
+    <option name="totallyTimeSpent" value="24649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1600" height="859" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13063063" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13063063" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32880434" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31929347" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31929347" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39538044" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -408,7 +377,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="10" weight="0.3292517" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32608697" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32608697" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32880434" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -431,18 +400,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/handler/reserve.py</url>
-          <line>131</line>
+          <line>129</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/handler/cancel.py</url>
           <line>33</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/calendar_upd.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/handler/reserve.py</url>
@@ -576,9 +540,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-          <folding>
-            <marker date="1571823111837" expanded="true" signature="1:1297" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -602,7 +563,7 @@
     <entry file="file://$PROJECT_DIR$/handler/keyboardHandler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
-          <caret line="37" column="42" lean-forward="true" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+          <caret line="37" column="42" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
@@ -612,7 +573,7 @@
     <entry file="file://$PROJECT_DIR$/handler/view.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
@@ -631,8 +592,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/reserve.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="89" column="115" selection-start-line="89" selection-start-column="115" selection-end-line="89" selection-end-column="115" />
+        <state relative-caret-position="240">
+          <caret line="25" selection-start-line="23" selection-end-line="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
