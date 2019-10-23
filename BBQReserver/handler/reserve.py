@@ -153,4 +153,6 @@ def choose_hour(update, context):
                     'This hour is already reserved.')
                 return False
         i += 1
+    update.message.reply_text(
+        'This hour is not available to reserve.')
     return False
