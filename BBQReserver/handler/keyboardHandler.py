@@ -21,7 +21,7 @@ def keyboard_handler(update, context):
             if choose_hour(update, context):
                 userState[update.message.chat.id]['state'] = 'slot'
                 cancel(update, context)
-                return
+            return
 
         elif userState[update.message.chat.id]['state'] == 'cancel':
             delete_reservation(update, context)

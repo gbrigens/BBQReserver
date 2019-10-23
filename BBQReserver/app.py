@@ -1,7 +1,8 @@
 # import telegram
+from datetime import date
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-from handler import base, keyboardHandler
+from handler import base, keyboardHandler, reserve
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -20,5 +21,7 @@ dispatcher.add_handler(message_handler)
 
 unknown_handler = MessageHandler(Filters.command, base.unknown)
 dispatcher.add_handler(unknown_handler)
+
+reserve.set_month()
 
 updater.start_polling()
