@@ -2,7 +2,7 @@
 *~
 
 # IDE folders and files
-*/.idea/*
+src/.idea/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
