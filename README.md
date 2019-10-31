@@ -1,2 +1,2 @@
 # BBQReserver
-A service extracting elective course information from Google Docs to Google Calendar for individual course selection.
+Telegram bot that allows Inno Ressidence to reserve BBQ area with ease using telegram.
