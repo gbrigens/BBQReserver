@@ -8,10 +8,10 @@ The BBQ Reservation application is meant to be a replacement for the current sys
 # Screenshots of the bot
 
 ## Start screen
-![](screenshot/start.png?raw=true)
+![start][screenshot/start.png]
 
 ## Reserve and choose month screen
-![](screenshot/reserve.png?raw=true)
+![reserve][screenshot/reserve.png?raw=true]
 
 ## Choose day screen
 ![](screenshot/day.png?raw=true)
