@@ -8,7 +8,7 @@ from handler.base import cancel
 from handler.reserve import userState
 
 
-def cancel_reservation(update, context):
+def cancel_reservation(bot, update):
     reservations = sess.query(Reservation).filter_by(user_id=update.message.chat.id).order_by(Reservation.day)
     response = "Choose the number of reservation you want to cancel:\n"
     i = 1
@@ -32,7 +32,7 @@ def cancel_reservation(update, context):
         reply_markup=ReplyKeyboardMarkup(buttons, resize_keyboard=True, one_time_keyboard=True))
 
 
-def delete_reservation(update, context):
+def delete_reservation(bot, update):
     if re.match('\d$', update.message.text) is not None:
         num = int(update.message.text)
         if num > userState[update.message.chat.id]['reservations']:
@@ -42,6 +42,6 @@ def delete_reservation(update, context):
         userState[update.message.chat.id] = {}
         update.message.reply_text(
             'Reservation was canceled.')
-        cancel(update, context)
+        cancel(bot, update)
     elif update.message.text == "Cancel":
-        cancel(update, context)
+        cancel(bot, update)
