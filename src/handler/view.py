@@ -5,7 +5,7 @@ from database import sess, Reservation
 from handler.base import cancel
 
 
-def view_reservations(update, context):
+def view_reservations(bot, update):
     reservations = sess.query(Reservation).filter_by(user_id = update.message.chat.id).order_by(Reservation.day)
     response = "You have made the following reservations:\n"
     i=1
@@ -21,4 +21,4 @@ def view_reservations(update, context):
     if response == "You have that reservations:\n":
         response = "You don't have any reservation."
     update.message.reply_text(response)
-    cancel(update, context)
+    cancel(bot, update)

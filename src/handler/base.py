@@ -4,7 +4,7 @@ from database import User, sess
 from handler import reserve
 
 
-def start(update, context):
+def start(bot, update):
     reply_keyboard = [['🖊 Reserve', '🗑 Cancel reservation', '📖 View reservations']]
     reserve.userState[update.message.chat.id] = {}
     user = User(id_=update.message.chat.id,
@@ -24,7 +24,7 @@ def start(update, context):
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
 
 
-def cancel(update, context):
+def cancel(bot, update):
     reply_keyboard = [['🖊 Reserve', '🗑 Cancel reservation', '📖 View reservations']]
     reserve.userState[update.message.chat.id] = {}
     update.message.reply_text(
@@ -32,5 +32,5 @@ def cancel(update, context):
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
 
 
-def unknown(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand what you've said.")
+def unknown(bot, update):
+    bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand what you've said.")

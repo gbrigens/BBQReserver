@@ -67,7 +67,7 @@ def set_days(month):
             DAYS[0].pop(0)
 
 
-def reserve(update, context):
+def reserve(bot, update):
     reply_keyboard = MONTHS
 
     this_day = date.today().month
@@ -75,10 +75,11 @@ def reserve(update, context):
         set_month()
     update.message.reply_text(
         'Choose the month, you want to reserve.',
-        reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True))
+        reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True)
+    )
 
 
-def choose_month(update, context):
+def choose_month(bot, update):
     i = 0
     while i < len(MONTHS):
         if update.message.text in MONTHS[i]:
@@ -94,7 +95,7 @@ def choose_month(update, context):
     return False
 
 
-def choose_day(update, context):
+def choose_day(bot, update):
     if re.match('\d\d$|\d$', update.message.text) is not None:
         day = int(update.message.text)
         if 0 < day <= calendar.monthrange(2019, userState[update.message.chat.id]['month'])[1]:
@@ -127,7 +128,7 @@ def choose_day(update, context):
     return False
 
 
-def choose_hour(update, context):
+def choose_hour(bot, update):
     i = 0
     while i < len(HOURS):
 

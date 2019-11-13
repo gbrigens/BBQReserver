@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 print(1)
 Session = sessionmaker()
 # Create SQLite db or use existing one
-engine = create_engine('sqlite:///sqlite3.db')
+engine = create_engine('sqlite:///sqlite3.db?check_same_thread=False')
 # Create a base for the models to build upon.
 Session.configure(bind=engine)
 Base = declarative_base()
