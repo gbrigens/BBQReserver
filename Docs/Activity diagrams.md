@@ -18,7 +18,7 @@
 
 ## Add the user to the waitlist
 
- ![](https://github.com/gbrigens/BBQReserver/blob/master/screenshot/add-the-user-waitlist.jpg)
+ ![](https://github.com/gbrigens/BBQReserver/blob/master/screenshot/Add-the-user-waitlist.jpg)
 
 ## Insert data
 
