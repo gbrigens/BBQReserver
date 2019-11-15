@@ -1,159 +1,229 @@
-import re
+from calendar import monthrange
+from datetime import date, datetime
+from time import strptime
+from math import ceil
 
-from datetime import date
-from telegram import ReplyKeyboardMarkup
-import calendar
+from sqlalchemy import func
+from telegram import ReplyKeyboardMarkup, ParseMode
+from telegram.ext import (MessageHandler, Filters, ConversationHandler)
 
-from database import Reservation, sess
+from database import Reservation, WaitingList, sess
+from handler import base
 
-userState = {}
+MONTH, DAY, HOUR = range(3)
 
-DEF_MONTHS = [['January', 'February', 'March'],
-              ['April', 'May', 'June'],
-              ['July', 'August', 'September'],
-              ['October', 'November', 'December']]
-
-
-def monthval(month):
-    i = 0
-    while i < len(DEF_MONTHS):
-        if month in DEF_MONTHS[i]:
-            return i * 3 + DEF_MONTHS[i].index(month) + 1
-        i += 1
-
-
-DEF_DAYS = [['1', '2', '3', '4', '5', '6', '7'],
-            ['8', '9', '10', '11', '12', '13', '14'],
-            ['15', '16', '17', '18', '19', '20', '21'],
-            ['22', '23', '24', '25', '26', '27', '28'],
-            ['29', '30', '31']]
-HOURS = [['08:00', '10:00', '12:00', '14:00'],
-         ['16:00', '18:00', '21:00'], ]
-
-MAX_DAYS = 31
-
-MONTHS = []
-DAYS = []
+YEAR = 2019
 today = date.today()
+next_month = date(today.year + (today.month // 12), ((today.month % 12) + 1), 1)
 
 
-def set_month():
-    global today, MONTHS, DAYS
-    today = date.today()
-    MONTHS = DEF_MONTHS.copy()
-    i = 0
-    while i < int(today.month / 3):
-        MONTHS.pop(0)
-        i += 1
-    i = 0
-    while i < int(today.month - 1) % 3:
-        MONTHS[0].pop(0)
-        i += 1
+# get month list
+def get_months(for_keyboard=False):
+    months = []
+    months.append(today.strftime("%B"))
+    months.append(next_month.strftime("%B"))
+    if for_keyboard:
+        months = [[i] for i in months]
+    months.append(['Cancel'])
+    return months
 
 
-def set_days(month):
-    global DAYS
-    DAYS = DEF_DAYS.copy()
-    num = MAX_DAYS - calendar.monthrange(2019, month)[1]
-    print(num)
-    for j in range(num):
-        DAYS[4].pop()
-    if month == date.today().month:
-        i = 0
-        while i < int(today.day / 7):
-            DAYS.pop(0)
-            i += 1
-        while int(today.day) > int(DAYS[0][0]):
-            DAYS[0].pop(0)
+# get days list in chosen month
+def get_days(month, for_keyboard=False):
+    first_day = 1
+    last_day = monthrange(today.year, month)[1]
+    if month == today.month:
+        first_day = today.day
+    if not for_keyboard:
+        return list(range(first_day, last_day+1))
+    total_days = last_day - first_day
+    rows = ceil(total_days/7)
+    days = [[] for i in range(rows)]
+    n = 0
+    for day in range(first_day, last_day+1):
+        days[n//7].append(str(day))
+        n += 1
+    days.append(['Back', 'Cancel'])
+    return days
 
 
-def reserve(bot, update):
-    reply_keyboard = MONTHS
+# get hours slot list in chosen day
+def get_hours(start=8, end=24, length=2, exclude=[], for_keyboard=False):
+    hours = []
+    for i in range(start, end, length):
+        item = "%02d"%i + ':00'
+        if item not in exclude:
+            hours.append(item)
+    if not for_keyboard:
+        return hours
+    n = ceil(len(hours)/2)
+    hours = [hours[i:i+n] for i in range(0, len(hours), n)]
+    hours.append(['Back', 'Cancel'])
+    return hours
 
-    this_day = date.today().month
-    if this_day != today.month:
-        set_month()
+
+def reserve(update, context):
+    reply_keyboard = get_months(for_keyboard=True)
     update.message.reply_text(
-        'Choose the month, you want to reserve.',
+        'Choose the month, you want to reserve',
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True)
     )
+    return MONTH
 
 
-def choose_month(bot, update):
-    i = 0
-    while i < len(MONTHS):
-        if update.message.text in MONTHS[i]:
-            set_days(monthval(update.message.text))
-            reply_keyboard = DAYS
+def choose_month(update, context):
+    months = get_months()
+    if update.message.text in months or ('month' in context.user_data and not update.message.text):
+        if update.message.text in months:
+            month = strptime(update.message.text,'%B').tm_mon
+            context.user_data['month'] = month
+        else:
+            month = context.user_data['month']
+        reply_keyboard = get_days(month=month, for_keyboard=True)
+        update.message.reply_text(
+            'Chosen month: `' + str(month) + '`\nChoose the day, you want to reserve',
+            reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True),
+            parse_mode=ParseMode.MARKDOWN
+        )
+        return DAY
+    if update.message.text == 'Cancel':
+        if 'month' in context.user_data:
+            del context.user_data['month']
+        base.cancel(update, context)
+        return ConversationHandler.END
+    reserve(update, context)
 
-            userState[update.message.chat.id]['month'] = monthval(update.message.text)
-            update.message.reply_text(
-                'Choose the day, you want to reserve.',
-                reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True))
-            return True
-        i += 1
-    return False
 
-
-def choose_day(bot, update):
-    if re.match('\d\d$|\d$', update.message.text) is not None:
+def choose_day(update, context):
+    if update.message.text.isnumeric():
         day = int(update.message.text)
-        if 0 < day <= calendar.monthrange(2019, userState[update.message.chat.id]['month'])[1]:
-            userState[update.message.chat.id]['day'] = day
-            reply_keyboard = HOURS
-            reserves = sess.query(Reservation).filter_by(day=date(2019,
-                                                                  int(userState[update.message.chat.id]['month']),
-                                                                  int(userState[update.message.chat.id]['day'])))
-            for res in reserves:
-                i = 0
-                for slots in HOURS:
-                    if res.slot in slots:
-                        reply_keyboard[i].pop(reply_keyboard[i].index(res.slot))
-                    i += 1
-            update.message.reply_text(
-                'Choose the hour, you want to reserve.',
-                reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True))
-
-            reserved = 'This hours are already reserved.\n'
-
-            for res in reserves:
-                print(res.slot, res.day)
-                reserved += res.slot + '\n'
-
-            if reserved == 'This hours are already reserved.\n':
-                reserved = 'Day is free.'
-            update.message.reply_text(
-                reserved)
-            return True
-    return False
-
-
-def choose_hour(bot, update):
-    i = 0
-    while i < len(HOURS):
-
-        if update.message.text in HOURS[i]:
-            check = sess.query(Reservation).filter_by(day=date(2019,
-                                                               int(userState[update.message.chat.id]['month']),
-                                                               int(userState[update.message.chat.id]['day'])),
-                                                      slot=update.message.text).first()
-            if check is None:
-                res = Reservation(user_id=update.message.chat.id,
-                                  day=date(2019,
-                                           int(userState[update.message.chat.id]['month']),
-                                           int(userState[update.message.chat.id]['day'])),
-                                  slot=update.message.text)
-                sess.add(res)
-                sess.commit()
-                userState[update.message.chat.id] = {}
+        days = get_days(context.user_data['month'])
+        if day in days:
+            context.user_data['day'] = day
+            chosen_day = date(YEAR, int(context.user_data['month']), int(context.user_data['day']))
+            user_reserves = sess.query(Reservation).filter(
+                Reservation.user_id == update.message.chat_id,
+                func.date(Reservation.day) == chosen_day,
+                Reservation.is_expired != True,
+            ).all()
+            if user_reserves:
                 update.message.reply_text(
-                    'Time reserved successfully.')
-                return True
-            else:
-                update.message.reply_text(
-                    'This hour is already reserved.')
-                return False
-        i += 1
-    update.message.reply_text(
-        'This hour is not available to reserve.')
-    return False
+                    'You already have the reservation on `' + chosen_day.strftime('%Y-%m-%d') + '`, you should cancel previous reservation if you want to change time',
+                    parse_mode=ParseMode.MARKDOWN
+                )
+                choose_month(update, context)
+                return DAY            
+            reserves = sess.query(Reservation).filter(
+                func.date(Reservation.day) == chosen_day
+            ).all()
+            reserved_slots = [i.slot for i in reserves]
+            reply_keyboard = get_hours(exclude=reserved_slots, for_keyboard=True)
+            text = "Chosen date: `" + chosen_day.strftime('%Y-%m-%d') + "`\nChoose the hour, you want to reserve."
+            if reserved_slots:
+                text += "\n\nThese hours are already reserved:\n```\n"
+                for slot in reserved_slots:
+                    text += slot + '\n'
+                text += '```'
+                reply_keyboard.insert(-1, ['Subscribe to waiting list'])
+            update.message.reply_text(
+                text, reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True, one_time_keyboard=True),
+                parse_mode=ParseMode.MARKDOWN
+            )
+            return HOUR
+    if update.message.text == 'Back':
+        reserve(update, context)
+        return MONTH
+    if update.message.text == 'Cancel':
+        base.cancel(update, context)
+        return ConversationHandler.END
+    choose_month(update, context)
+    return DAY
+
+
+def choose_hour(update, context):
+    hours = get_hours()
+    if update.message.text in hours:
+        splitted_time = update.message.text.split(':')
+        chosen_day = datetime(YEAR, int(context.user_data['month']), int(context.user_data['day']), int(splitted_time[0]), int(splitted_time[1]), 0)
+        check = sess.query(Reservation).filter_by(
+            day=chosen_day,
+            slot=update.message.text
+        ).first()
+        if check is None:
+            res = Reservation(
+                user_id=update.message.chat.id,
+                day=chosen_day,
+                slot=update.message.text
+            )
+            sess.add(res)
+            waitinglist = sess.query(WaitingList).filter(
+                WaitingList.user_id == update.message.chat.id,
+                WaitingList.day == date(chosen_day.year, chosen_day.month, chosen_day.day),
+            ).first()
+            if waitinglist:
+                sess.delete(waitinglist)
+            sess.commit()
+
+            text = 'Time `' + chosen_day.strftime("%Y-%m-%d %H:%M") + '` reserved successfully'
+            update.message.reply_text(text, reply_markup=ReplyKeyboardMarkup(base.main_menu, resize_keyboard=True), parse_mode=ParseMode.MARKDOWN)
+            return ConversationHandler.END
+        update.message.reply_text('This hour is already reserved')
+    elif update.message.text == 'Back':
+        choose_month(update, context)
+        return DAY
+    elif update.message.text == 'Cancel':
+        base.cancel(update, context)
+        return ConversationHandler.END
+    elif update.message.text == 'Subscribe to waiting list':
+        response = subscribe_user_to_waiting_list(context, update.message.chat.id)
+        update.message.reply_text(response, parse_mode=ParseMode.MARKDOWN)
+        base.cancel(update, context)
+        return ConversationHandler.END
+    else:
+        update.message.reply_text('Wrong hour')
+    choose_day(update, context)
+    return HOUR
+    
+
+
+def cancel(update, context):
+    update.message.reply_text("Cancelling...", reply_markup=ReplyKeyboardMarkup(base.main_menu, resize_keyboard=True))
+    return ConversationHandler.END
+
+
+def subscribe_user_to_waiting_list(context, user_id):
+    chosen_day = date(YEAR, int(context.user_data['month']), int(context.user_data['day']))
+    waitinglist = sess.query(WaitingList).filter(
+        WaitingList.user_id == user_id,
+        WaitingList.day == chosen_day,
+    ).first()
+    if waitinglist:
+        return  'You are already in Waiting list for `' + chosen_day.strftime("%Y-%m-%d") + '`'
+    new_waitinglist = WaitingList(
+        user_id=user_id,
+        day=chosen_day,
+    )
+    sess.add(new_waitinglist)
+    sess.commit()
+    return  'You are added to Waiting list successfully for `' + chosen_day.strftime("%Y-%m-%d") + '`. The bot will notify you if any reservation on this day is cancelled'
+
+
+#ConversationHandler to create reservations
+reserve_conv_handler = ConversationHandler(
+    entry_points=[MessageHandler(Filters.regex('^(🖊 Reserve)$'), reserve)],
+    states={
+        MONTH: [
+            MessageHandler(Filters.text, choose_month),
+        ],
+        DAY: [
+            MessageHandler(Filters.text, choose_day),
+        ],
+        HOUR: [
+            MessageHandler(Filters.text,choose_hour),
+        ],
+    },
+
+    fallbacks=[MessageHandler(Filters.regex('^Cancel$'), cancel)],
+    name="create_reserve_conversation",
+    persistent=True
+)
