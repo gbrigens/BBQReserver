@@ -54,19 +54,12 @@ User use cases
 | **Brief description:** | The user creates reservation by selecting an available date and time. |
 | **Preconditions:** | The user already has:
 - --less than 1 reservation for the selected day
-- --less than 3 reservation for the selected week
-- --less than 12 reservation for the selected month
  |
 | **Flow of events:** |
 1. The user selects the option to create a reservation.
 2. The bot returns a list of available dates:
-
-- --today
-- --tomorrow
-- --the day after tomorrow.
-
-1. The user selects the date.
-2. The bot returns the list of time slots for the selected date.
+3. The user selects the date.
+4. The bot returns the list of time slots for the selected date.
  |
 | **Postconditions:** | The bot provides the list of time slots for the selected date and option to be added to the waitlist. |
 | **Priority:** | High |
