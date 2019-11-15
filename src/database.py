@@ -1,4 +1,6 @@
-from sqlalchemy import create_engine, Column, Date, Boolean, Integer, String, Text, ForeignKey, Index, UniqueConstraint
+from datetime import date, datetime
+
+from sqlalchemy import create_engine, Column, Date, DateTime, Boolean, Integer, String, Text, ForeignKey, Index, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
@@ -41,25 +43,6 @@ class Message(Base):
 #     id_ = Column(Integer, primary_key=True)
 
 
-ts_08_10 = '08:00-10:00'
-ts_10_12 = '10:00-12:00'
-ts_12_14 = '12:00-14:00'
-ts_14_16 = '14:00-16:00'
-ts_16_18 = '16:00-18:00'
-ts_18_21 = '18:00-21:00'
-ts_21_24 = '21:00-00:00'
-
-TIME_SLOTS = (
-    8, ts_08_10,
-    10, ts_10_12,
-    12, ts_12_14,
-    14, ts_14_16,
-    16, ts_16_18,
-    18, ts_18_21,
-    21, ts_21_24,
-)
-
-
 class Reservation(Base):
     """
     Reservation.
@@ -70,9 +53,10 @@ class Reservation(Base):
 
     id_ = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id_"), nullable=False)
-    day = Column(Date(), nullable=False)
-    # We'll put either of 8, 10, 12, 14, 16, 18, 21 here
+    day = Column(DateTime(), nullable=False)
     slot = Column(Integer, nullable=False)
+    is_expired = Column(Boolean(), default=False)
+    is_confirmed = Column(Boolean(), default=False)
     unique_reserve = (UniqueConstraint('day', 'slot', name='_unique_reservation_'))
 
 
@@ -85,7 +69,7 @@ class WaitingList(Base):
 
     id_ = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id_"), nullable=False)
-    reservation_id = Column(Integer, ForeignKey("reservation.id_"), nullable=False)
+    day = Column(Date(), nullable=False)
 
 
 # Create all tables in the engine. This is equivalent to "Create Table"
@@ -93,3 +77,15 @@ class WaitingList(Base):
 
 Base.metadata.create_all(engine)
 print(0)
+
+#Set reservations as expired
+def set_expired_reservations():
+    expired_entries = sess.query(Reservation).filter(Reservation.day < datetime.now()).all()
+    for c in expired_entries:
+        c.is_expired = True
+    sess.commit()
+
+def get_awaiting_users(day):
+    awaiting_users = sess.query(WaitingList).filter(WaitingList.day == date(day.year, day.month, day.day)).all()
+    return awaiting_users
+
