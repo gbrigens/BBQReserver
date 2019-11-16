@@ -47,6 +47,9 @@ The BBQ Reservation is a bot to replace the current system which is just a googl
 ## Notification of canceled date of intrest
 <img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/notificationforfreespot.jpg" height=600>
 
+## Notification reminder
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/reminder.png" height=600>
+
 ## How to install
 ## Requrements:
 - git module
