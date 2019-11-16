@@ -13,30 +13,39 @@ The BBQ Reservation is a bot to replace the current system which is just a googl
 # Screenshots of the bot
 
 ## Start screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/start.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/start.jpg" height=600>
+
+## Welcome screen
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/welcome.jpg" height=600>
 
 ## Reserve and choose month screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/reserve.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/choosemonth.jpg" height=600>
 
 ## Choose day screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/day.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/chooseday.jpg" height=600>
 
 ## Choose time screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/time.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/chooseday.jpg" height=600>
 
 ## Success screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/success.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/reservesuccessful.jpg" height=600>
 
 
 ## View reservation screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/view.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/viewreservation.jpg" height=600>
 
 ## Cancel screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/cancel.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/cancelresavetion.jpg" height=600>
 
 
 ## Cancel success screen
-<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/cancel-success.PNG" height=600>
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/reservationcancelsuccessful.jpg" height=600>
+
+## Subscribe to waitinglist
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/subscribetowaitlist.jpg" height=600>
+
+## Notification of canceled date of intrest
+<img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/notificationforfreespot.jpg" height=600>
 
 ## How to install
 ## Requrements:

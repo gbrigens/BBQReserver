@@ -71,6 +71,7 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+src/sqlite3.db
 
 # Apple
 .DS_Store

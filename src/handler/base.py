@@ -3,10 +3,9 @@ from telegram import ReplyKeyboardMarkup
 from database import User, sess
 from handler import reserve
 
+main_menu = [['🖊 Reserve'], ['🗑 Cancel reservation'], ['📖 View reservations']]
 
-def start(bot, update):
-    reply_keyboard = [['🖊 Reserve', '🗑 Cancel reservation', '📖 View reservations']]
-    reserve.userState[update.message.chat.id] = {}
+def start(update, context):
     user = User(id_=update.message.chat.id,
                 telegramID=update.message.chat.username)
     check = sess.query(User).get(update.message.chat.id)
@@ -21,15 +20,13 @@ def start(bot, update):
         '- a book time slot for barbecue zone;\n'
         '- cancel booking;\n'
         'Send /cancel if you want to return to the main menu(just in case)',
-        reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
+        reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
 
 
-def cancel(bot, update):
-    reply_keyboard = [['🖊 Reserve', '🗑 Cancel reservation', '📖 View reservations']]
-    reserve.userState[update.message.chat.id] = {}
+def cancel(update, context):
     update.message.reply_text(
         'Back to the main menu we go...',
-        reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
+        reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
 
 
 def unknown(bot, update):
