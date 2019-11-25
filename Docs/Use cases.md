@@ -57,7 +57,7 @@ User use cases
 | **Flow of events:** | 1. A1. The user selects the option to create a new reservation. </br> 2. S1. Telegram bot provide a list of current and next month </br> 3. A2. User select the month </br> 4. S2. Telegram bot provide the list of day of the month remaining based on the date. </br> 5. A3. User select the prefered date from the list provided. </br> 6. S3. Telegram bot presents the user with a list of time slot, the time is between 8AM - 10PM with an interval of 2 hours </br> 7. A4. User select the time from the list </br> 8. S4. Telegram bot display success message to the user|
 | **Postconditions:** | The bot provides the list of time slots for the selected date and option to be added to the waitlist. |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | AE1. The user cannot create a reservation if he has reached the limit for the maximal number of reservations. |
+| **Alternative flows**  **and exceptions:** | AE1. User tries to reserve for a day already has a reservation on. </br> SE1. Telegram bot notices there are no available slots and presents the user with subscribe to waiting list button </br> SE2. User selects the subscribe option </br> SE3. Bot subscribes user to waiting list. |
 | **Assumptions:** | A user started the chat with the Telegram bot. |
 
 
