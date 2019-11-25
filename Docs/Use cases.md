@@ -54,10 +54,10 @@ User use cases
 | **Secondary Actors:** | Telegram bot |
 | **Brief description:** | The user creates reservation by selecting an available date and time. |
 | **Preconditions:** | The user already has: </br> less than 1 reservation for the selected day|
-| **Flow of events:** | 1. The user selects the option to create a reservation. </br> 2. The bot returns a list of available dates: </br> 3. The user selects the date. </br> 4. The bot returns the list of time slots for the selected date.|
+| **Flow of events:** | 1. A1. The user selects the option to create a reservation. </br> 2. S1. The bot returns a list of available dates: </br> 3. A2. The user selects the date. </br> 4. S2. The bot returns the list of time slots for the selected date.|
 | **Postconditions:** | The bot provides the list of time slots for the selected date and option to be added to the waitlist. |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | The user cannot create a reservation if he has reached the limit for the maximal number of reservations. |
+| **Alternative flows**  **and exceptions:** | AE1. The user cannot create a reservation if he has reached the limit for the maximal number of reservations. |
 | **Assumptions:** | A user started the chat with the Telegram bot. |
 
 
@@ -71,10 +71,10 @@ User use cases
 | **Secondary Actors:** | Telegram bot |
 | **Brief description:** | A user delete own existing reservation |
 | **Preconditions:** | User&#39;s reservation must be existed |
-| **Flow of events:** | 1. User selects option cancel reservation </br> 2.User receives list of his reservations </br> 3. User selects reservation for cancelation </br> 4. Include DD-10|
+| **Flow of events:** | 1. A1. User selects option cancel reservation </br> 2. S1. User receives list of his reservations </br> 3. A2. User selects reservation for cancelation </br> 4. S2. Include DD-10|
 | **Postconditions:** | Selected reservation time slot |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | - If user has not any active reservations, user will be provided with message about absence of reservations, and cancelation of chosen user&#39;s action </br> - If user select option by accident, user can leave option with back button|
+| **Alternative flows**  **and exceptions:** | AE1 - If user has not any active reservations, user will be provided with message about absence of reservations, and cancelation of chosen user&#39;s action </br> AE2 - If user select option by accident, user can leave option with back button|
 
   
 
@@ -87,10 +87,10 @@ User use cases
 | **Secondary Actors:** | Telegram bot |
 | **Brief description:** | A user requests the bot to provide his/her list of existing reservations |
 | **Precondition:** | At least one existing reservation for a user who initiate the command in upcoming dates |
-| **Flow of events:** | 1. A user presses button &quot;View my reservations&quot; </br> 2. The bot reads data of the user by telegram id in the database3. Include SL-10 |
+| **Flow of events:** | 1. A1 A user presses button &quot;View my reservations&quot; </br> 2. S1. The bot reads data of the user by telegram id in the database3. Include SL-10 |
 | **Postcondition:** | List of user&#39;s reservations |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | If the user does not have any reservations the bot must send message: &quot;You have not made any reservations yet&quot; |
+| **Alternative flows**  **and exceptions:** | AE1. If the user does not have any reservations the bot must send message: &quot;You have not made any reservations yet&quot; |
 
   
 
@@ -103,7 +103,7 @@ User use cases
 | --- | --- |
 | **Use case ID:** | NR-20 |
 | **Brief description:** | The bot makes updates in the database. |
-| **Flow of events:** | 1. The bot identifies user id. </br> 2. The bot makes changes in the corresponding row for the user.|
+| **Flow of events:** | 1. S1. The bot identifies user id. </br> S2. 2. The bot makes changes in the corresponding row for the user.|
 | **Postconditions:** | The data is updated in the database for the user. |
 | **Priority:** | High |
 | **Non-behavioral**** requirements:** | The bot should have constant connection to the Internet |
@@ -123,7 +123,7 @@ User use cases
 | **Extended use case name:** | Create reservation |
 | **Extension point:** | Add user to the waitlist. |
 | **Guard condition (precondition):** | The user selects an option to be added to the waitlist. |
-| **Flow of events:** |1. The bot adds the user to the waitlist table in the database (S - Activity 2, NR-20)|
+| **Flow of events:** |1. S1. The bot adds the user to the waitlist table in the database (S - Activity 2, NR-20)|
 | **Postconditions:** | The user is added to the waitlist. |
 | **Priority:** | Medium |
 
@@ -142,10 +142,10 @@ User use cases
 | **Extended use case name:** | Create reservation |
 | **Extension point:** | Create a reservation for a free time slot. |
 | **Guard condition (precondition):** | The user selects a free time slot. |
-| **Flow of events:** | 1. The bot inserts the selected date, time and the user&#39;s telegram ID to the reservations table in the database. (S - Activity 2, NR-20)|
+| **Flow of events:** | 1. S1. The bot inserts the selected date, time and the user&#39;s telegram ID to the reservations table in the database. (S - Activity 2, NR-20)|
 | **Postconditions:** | The data about reservations is inserted in the database. |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | The user may not respond in the appropriate time and the chosen time slot can be reserved, in this case user will receive message &quot;This reservation has already been booked&quot; |
+| **Alternative flows**  **and exceptions:** | AE1. The user may not respond in the appropriate time and the chosen time slot can be reserved, in this case user will receive message &quot;This reservation has already been booked&quot; |
 | **Issues:** | Two users can select in the same time slots at the same time. This causes the problem with concurrent data. |
 
   
@@ -160,10 +160,10 @@ User use cases
 | **Parent use case name:** | Update the database (abstract use case) |
 | **Parent use case ID:** | NR-20 |
 | **Preconditions:** | Selected reservation |
-| **Flow of events:** | 1. Search reservation in database (S - Activity 2, NR-20) 2. Delete the reservation (S - Activity 2, NR-20)|
+| **Flow of events:** | 1. S1. Search reservation in database (S - Activity 2, NR-20) 2. S2. Delete the reservation (S - Activity 2, NR-20)|
 | **Postconditions:** | Deleted reservation row |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | - If user has not any active reservations, user will be provided with message about absence of reservations, and cancelation of chosen user&#39;s action|
+| **Alternative flows**  **and exceptions:** | AE1 - If user has not any active reservations, user will be provided with message about absence of reservations, and cancelation of chosen user&#39;s action|
 
   
 
@@ -175,7 +175,7 @@ User use cases
 | --- | --- |
 | **Use case ID:** | SM-10 |
 | **Brief description:** | The bot makes updates in the database. |
-| **Flow of events:** | 1. The bot finds the user. </br> 2. The bot sends a message.|
+| **Flow of events:** | 1. S1. The bot finds the user. </br> 2. S2. The bot sends a message.|
 | **Postconditions:** | The message is sent to the user. |
 | **Priority:** | High |
 | **Issues:** | The bot cannot send message to the user if he closes the chat. |
@@ -190,8 +190,8 @@ User use cases
 | **Parent use case name:** | Send message (abstract use case) |
 | **Parent use case ID:** | SM-10 |
 | **Extension point:** | Deleted reservation row |
-| **Guard condition (precondition):** | There is at least one user in waiting list on the reservation date |
-| **Flow of events:** | 1. Bot extracts telegram ids from waiting list (S - Activity 1, SM-10) 2. Bot sends notifications for extracted ids (S - Activity 2, SM-10) |
+| **Guard condition (precondition):** | A1 There is at least one user in waiting list on the reservation date |
+| **Flow of events:** | 1. S1. Bot extracts telegram ids from waiting list (S - Activity 1, SM-10) 2. S2 Bot sends notifications for extracted ids (S - Activity 2, SM-10) |
 | **Postconditions:** | Notifications are sent to the users |
 | **Priority:** | High |
 
@@ -204,7 +204,7 @@ User use cases
 | **Brief description:** | The bot sends message with information about user&#39;s reservations |
 | **Parent use case name:** | Send message (abstract use case) |
 | **Parent use case ID:** | SM-10 |
-| **Flow of events:** | 1. S1 Bot transforms data of the list into a message according to a template (S - Activity 2, SM-10) </br> S2 2. Bot sends the message to the user (S - Activity 2, SM-10) |
+| **Flow of events:** | 1. S1. Bot transforms data of the list into a message according to a template (S - Activity 2, SM-10) </br> 2. S2. Bot sends the message to the user (S - Activity 2, SM-10) |
 | **Postcondition:** | Message with the user&#39;s reservations |
 | **Priority:** | Medium |
 
@@ -225,5 +225,5 @@ User use cases
 | **Flow of events:** | 1. S1. Bot finds user&#39;s telegram id by a reservation (S - Activity 1, SM-10) </br> 2. S2. Bot sends a message to the user with the reservation description and two options to choose: &quot;Confirm&quot; and &quot;Cancel&quot; (S - Activity 2, SM-10) |
 | **Postcondition:** | The user&#39;s choice: &quot;Confirm&quot; or &quot;Cancel&quot; |
 | **Priority:** | High |
-| **Alternative flows**  **and exceptions:** | A1 - If the user chooses &quot;Confirm&quot;, the bot will send a message to user with the text &quot;Your reservation was confirmed&quot; with no data modification </br> A2 - If the user chooses &quot;Cancel&quot; </br> A3 - go to the extending use case DD-10 </br> A4 - The user may respond not on time, for example when the reservation has already expired, in this case the bot sends message &quot;This reservation has already expired&quot; |
+| **Alternative flows**  **and exceptions:** | AE1 - If the user chooses &quot;Confirm&quot;, the bot will send a message to user with the text &quot;Your reservation was confirmed&quot; with no data modification </br> AE2 - If the user chooses &quot;Cancel&quot; </br> AE3 - go to the extending use case DD-10 </br> AE4 - The user may respond not on time, for example when the reservation has already expired, in this case the bot sends message &quot;This reservation has already expired&quot; |
 | **Assumptions:** | - The user may not be able to respond to the bot request, in this the bot will do nothing |
