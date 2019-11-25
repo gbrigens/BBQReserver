@@ -54,7 +54,7 @@ User use cases
 | **Secondary Actors:** | Telegram bot |
 | **Brief description:** | The user creates reservation by selecting an available date and time. |
 | **Preconditions:** | The user already has: </br> less than 1 reservation for the selected day|
-| **Flow of events:** | 1. A1. The user selects the option to create a reservation. </br> 2. S1. The bot returns a list of available dates: </br> 3. A2. The user selects the date. </br> 4. S2. The bot returns the list of time slots for the selected date.|
+| **Flow of events:** | 1. A1. The user selects the option to create a new reservation. </br> 2. S1. Telegram bot provide a list of current and next month </br> 3. A2. User select the month </br> 4. S2. Telegram bot provide the list of day of the month remaining based on the date. </br> 5. A3. User select the prefered date from the list provided. </br> 6. S3. Telegram bot presents the user with a list of time slot, the time is between 8AM - 10PM with an interval of 2 hours </br> 7. A4. User select the time from the list </br> 8. S4. Telegram bot display success message to the user|
 | **Postconditions:** | The bot provides the list of time slots for the selected date and option to be added to the waitlist. |
 | **Priority:** | High |
 | **Alternative flows**  **and exceptions:** | AE1. The user cannot create a reservation if he has reached the limit for the maximal number of reservations. |
@@ -71,7 +71,7 @@ User use cases
 | **Secondary Actors:** | Telegram bot |
 | **Brief description:** | A user delete own existing reservation |
 | **Preconditions:** | User&#39;s reservation must be existed |
-| **Flow of events:** | 1. A1. User selects option cancel reservation </br> 2. S1. User receives list of his reservations </br> 3. A2. User selects reservation for cancelation </br> 4. S2. Include DD-10|
+| **Flow of events:** | 1. A1. User selects option cancel reservation </br> 2. S1. User receives list of his reservations with button with ID numbers to refer to each reservation </br> 3. A2. User selects a button to cancelation </br> 4. S3. Telegram print success </br> 5. S4. Include DD-10|
 | **Postconditions:** | Selected reservation time slot |
 | **Priority:** | High |
 | **Alternative flows**  **and exceptions:** | AE1 - If user has not any active reservations, user will be provided with message about absence of reservations, and cancelation of chosen user&#39;s action </br> AE2 - If user select option by accident, user can leave option with back button|
@@ -87,7 +87,7 @@ User use cases
 | **Secondary Actors:** | Telegram bot |
 | **Brief description:** | A user requests the bot to provide his/her list of existing reservations |
 | **Precondition:** | At least one existing reservation for a user who initiate the command in upcoming dates |
-| **Flow of events:** | 1. A1 A user presses button &quot;View my reservations&quot; </br> 2. S1. The bot reads data of the user by telegram id in the database3. Include SL-10 |
+| **Flow of events:** | 1. A1 A user presses button &quot;View reservations&quot; </br> 2. S1. The bot reads data of the user by telegram id in the database3. Include SL-10 |
 | **Postcondition:** | List of user&#39;s reservations |
 | **Priority:** | High |
 | **Alternative flows**  **and exceptions:** | AE1. If the user does not have any reservations the bot must send message: &quot;You have not made any reservations yet&quot; |
