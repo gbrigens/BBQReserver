@@ -222,7 +222,7 @@ User use cases
 | **Brief description:** | The bot sends requests to a user to confirm upcoming reservation |
 | **Parent use case name:** | Send message (abstract use case) |
 | **Parent use case ID:** | SM-10 |
-| **Flow of events:** | 1. S1 Bot finds user&#39;s telegram id by a reservation (S - Activity 1, SM-10) </br> S2 2. Bot sends a message to the user with the reservation description and two options to choose: &quot;Confirm&quot; and &quot;Cancel&quot; (S - Activity 2, SM-10) |
+| **Flow of events:** | 1. S1. Bot finds user&#39;s telegram id by a reservation (S - Activity 1, SM-10) </br> 2. S2. Bot sends a message to the user with the reservation description and two options to choose: &quot;Confirm&quot; and &quot;Cancel&quot; (S - Activity 2, SM-10) |
 | **Postcondition:** | The user&#39;s choice: &quot;Confirm&quot; or &quot;Cancel&quot; |
 | **Priority:** | High |
 | **Alternative flows**  **and exceptions:** | A1 - If the user chooses &quot;Confirm&quot;, the bot will send a message to user with the text &quot;Your reservation was confirmed&quot; with no data modification </br> A2 - If the user chooses &quot;Cancel&quot; </br> A3 - go to the extending use case DD-10 </br> A4 - The user may respond not on time, for example when the reservation has already expired, in this case the bot sends message &quot;This reservation has already expired&quot; |
