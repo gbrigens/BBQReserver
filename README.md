@@ -8,7 +8,7 @@ The BBQ Reservation is a bot to replace the current system which is just a googl
 5. Notification : For example when you have subscribed to waiting list and the day and time is free you will be notify and you can book.
 
 # Short Video of how it works
-[<img src="https://www.luceysgoodfood.com/wp-content/uploads/2016/10/bbq_meats.jpg" height=300, width=450>](https://youtu.be/pFCV882fQuU)
+[<img src="https://www.luceysgoodfood.com/wp-content/uploads/2016/10/bbq_meats.jpg" height=300, width=450>](https://youtu.be/8kLkf7Gp8ZI)
 
 # Screenshots of the bot
 
