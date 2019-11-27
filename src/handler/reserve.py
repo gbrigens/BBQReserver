@@ -73,12 +73,13 @@ def reserve(update, context):
 
 def choose_month(update, context):
     months = get_months()
-    if update.message.text in months or ('month' in context.user_data and not update.message.text):
-        if update.message.text in months:
-            month = strptime(update.message.text,'%B').tm_mon
-            context.user_data['month'] = month
-        else:
+    if update.message.text in months or ('month' in context.user_data and 'wrong_day' in context.user_data):
+        if 'wrong_day' in context.user_data:
             month = context.user_data['month']
+            del context.user_data['wrong_day']
+        else:
+            month = strptime(update.message.text, '%B').tm_mon
+            context.user_data['month'] = month
         reply_keyboard = get_days(month=month, for_keyboard=True)
         update.message.reply_text(
             'Chosen month: `' + str(month) + '`\nChoose the day, you want to reserve',
@@ -95,8 +96,12 @@ def choose_month(update, context):
 
 
 def choose_day(update, context):
-    if update.message.text.isnumeric():
-        day = int(update.message.text)
+    if update.message.text.isnumeric() or ('day' in context.user_data and 'wrong_hour' in context.user_data):
+        if 'wrong_hour' in context.user_data:
+            day = context.user_data['day']
+            del context.user_data['wrong_hour']
+        else:
+            day = int(update.message.text)
         days = get_days(context.user_data['month'])
         if day in days:
             context.user_data['day'] = day
@@ -130,6 +135,9 @@ def choose_day(update, context):
                 parse_mode=ParseMode.MARKDOWN
             )
             return HOUR
+        else:
+            context.user_data['wrong_day'] = True
+            update.message.reply_text('Wrong date')
     if update.message.text == 'Back':
         reserve(update, context)
         return MONTH
@@ -169,17 +177,19 @@ def choose_hour(update, context):
             return ConversationHandler.END
         update.message.reply_text('This hour is already reserved')
     elif update.message.text == 'Back':
+        context.user_data['wrong_day'] = True
         choose_month(update, context)
         return DAY
-    elif update.message.text == 'Cancel':
-        base.cancel(update, context)
-        return ConversationHandler.END
     elif update.message.text == 'Subscribe to waiting list':
         response = subscribe_user_to_waiting_list(context, update.message.chat.id)
         update.message.reply_text(response, parse_mode=ParseMode.MARKDOWN)
         base.cancel(update, context)
         return ConversationHandler.END
+    elif update.message.text == 'Cancel':
+        base.cancel(update, context)
+        return ConversationHandler.END
     else:
+        context.user_data['wrong_hour'] = True
         update.message.reply_text('Wrong hour')
     choose_day(update, context)
     return HOUR

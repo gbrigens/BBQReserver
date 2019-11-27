@@ -44,7 +44,7 @@ def delete_reservation(update, context):
             choose_reservation(update, context)
             if awaiting_users_list:
                 notify_awaiting_users(context, awaiting_users_list)
-            return CHOOSE
+            return ConversationHandler.END
     elif update.message.text == "Cancel":
         cancel(update, context)
         return ConversationHandler.END

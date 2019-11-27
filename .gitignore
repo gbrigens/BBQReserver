@@ -70,9 +70,16 @@ celerybeat-schedule
 # virtualenv
 .venv
 venv/
+env/
 ENV/
+# databases
 src/sqlite3.db
+src/tests/sqlite3.db
 src/sqlite3-journal.db
+
+src/bbqreserve
+src/tests/bbqreserve_test
+src/tests/.pytest_cache/
 
 # Apple
 .DS_Store

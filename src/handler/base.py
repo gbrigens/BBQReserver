@@ -3,7 +3,7 @@ from telegram import ReplyKeyboardMarkup
 from database import User, sess
 from handler import reserve
 
-main_menu = [['🖊 Reserve'], ['🗑 Cancel reservation'], ['📖 View reservations']]
+main_menu = [['🖊 Reserve'], ['🗑 Cancel reservation'], ['📖 View reservations'], ['💬 Report violation']]
 
 def start(update, context):
     user = User(id_=update.message.chat.id,
@@ -29,5 +29,8 @@ def cancel(update, context):
         reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
 
 
-def unknown(bot, update):
-    bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand what you've said.")
+def unknown(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Sorry, I didn't understand what you've said.")
+
+def report(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="If you want to report about something or if you need help, please, write to @bbqadmin or call +7920000000.")
