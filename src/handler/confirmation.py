@@ -4,7 +4,9 @@ from telegram import ReplyKeyboardMarkup, ParseMode
 from database import sess, Reservation
 from handler.base import main_menu, unknown
 
-
+##########################################################################
+###########   Request confirmation RC-10                     #############
+##########################################################################
 def check_confirmation(update, context):
     now = datetime.now()
     two_hours = now + timedelta(days=2)
