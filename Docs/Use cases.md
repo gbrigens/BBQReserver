@@ -196,7 +196,7 @@ User use cases
 | **Priority:** | High |
 
 ---------------------------------------------------------------------------------------------------------
-| **Use case name:** | Send list of the user&#39;s reservations [View Code]([View code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/view.py)|
+| **Use case name:** | Send list of the user&#39;s reservations [View code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/view.py)|
 | --- | --- |
 | **Use Case ID:** | SL-10 |
 | **Primary Actors:** | Telegram bot |
