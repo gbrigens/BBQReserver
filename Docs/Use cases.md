@@ -79,7 +79,7 @@ User use cases
   
 
 ------------------------------------------------------------------------------------------------
-## View reservation
+## View reservation [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/view.py)
 | **Use case name:** | View reservation |
 | --- | --- |
 | **ID:** | VR-10 |
