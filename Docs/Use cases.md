@@ -46,7 +46,7 @@ User use cases
 
   
   
-## Create reservation
+## Create reservation [View code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/reserve.py)
 | **Use Case Name:** | Create reservation |
 | --- | --- |
 | **Use Case ID:** | NR-10 |
@@ -63,7 +63,7 @@ User use cases
 
 ------------------------------------------------------------------------------------------------
   
-## Cancel reservation
+## Cancel reservation [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/cancel.py)
 | **Use Case Name:** | Cancel reservation |
 | --- | --- |
 | **Use Case ID:** | CR-10 |
@@ -79,7 +79,7 @@ User use cases
   
 
 ------------------------------------------------------------------------------------------------
-## View reservation
+## View reservation [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/view.py)
 | **Use case name:** | View reservation |
 | --- | --- |
 | **ID:** | VR-10 |
@@ -99,7 +99,7 @@ User use cases
 ## Bot use cases
 ### Update Database Specification
 
-| **Use case name:** | Update the database (abstract use case) |
+| **Use case name:** | Update the database (abstract use case) [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/base.py) |
 | --- | --- |
 | **Use case ID:** | NR-20 |
 | **Brief description:** | The bot makes updates in the database. |
