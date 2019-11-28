@@ -99,7 +99,7 @@ User use cases
 ## Bot use cases
 ### Update Database Specification
 
-| **Use case name:** | Update the database (abstract use case) |
+| **Use case name:** | Update the database (abstract use case) [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/base.py) |
 | --- | --- |
 | **Use case ID:** | NR-20 |
 | **Brief description:** | The bot makes updates in the database. |
