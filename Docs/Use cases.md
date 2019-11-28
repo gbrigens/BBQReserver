@@ -46,7 +46,7 @@ User use cases
 
   
   
-
+## Create reservation
 | **Use Case Name:** | Create reservation |
 | --- | --- |
 | **Use Case ID:** | NR-10 |
@@ -63,7 +63,7 @@ User use cases
 
 ------------------------------------------------------------------------------------------------
   
-
+## Cancel reservation
 | **Use Case Name:** | Cancel reservation |
 | --- | --- |
 | **Use Case ID:** | CR-10 |
@@ -79,7 +79,7 @@ User use cases
   
 
 ------------------------------------------------------------------------------------------------
-
+## View reservation
 | **Use case name:** | View reservation |
 | --- | --- |
 | **ID:** | VR-10 |
@@ -103,7 +103,7 @@ User use cases
 | --- | --- |
 | **Use case ID:** | NR-20 |
 | **Brief description:** | The bot makes updates in the database. |
-| **Flow of events:** | 1. S1. The bot identifies user id. </br> S2. 2. The bot makes changes in the corresponding row for the user.|
+| **Flow of events:** | 1. S1. The bot identifies user id. </br> 2. S2. The bot makes changes in the corresponding row for the user.|
 | **Postconditions:** | The data is updated in the database for the user. |
 | **Priority:** | High |
 | **Non-behavioral**** requirements:** | The bot should have constant connection to the Internet |
