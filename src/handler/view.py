@@ -4,6 +4,9 @@ from telegram import ReplyKeyboardMarkup, ParseMode
 from database import sess, Reservation
 from handler.base import main_menu
 
+##########################################################################
+###########   View Use-Case VR-10 |SL-10                     #############
+##########################################################################
 
 def view_reservations(update, context):
     reservations = sess.query(Reservation).filter(

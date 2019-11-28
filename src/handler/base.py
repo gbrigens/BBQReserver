@@ -5,6 +5,10 @@ from handler import reserve
 
 main_menu = [['🖊 Reserve'], ['🗑 Cancel reservation'], ['📖 View reservations'], ['💬 Report violation']]
 
+##########################################################################
+###########   Update Database Specification NR-10            #############
+##########################################################################
+
 def start(update, context):
     user = User(id_=update.message.chat.id,
                 telegramID=update.message.chat.username)

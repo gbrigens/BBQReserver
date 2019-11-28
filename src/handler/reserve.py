@@ -16,6 +16,9 @@ YEAR = 2019
 today = date.today()
 next_month = date(today.year + (today.month // 12), ((today.month % 12) + 1), 1)
 
+##########################################################################
+###########   Create reservation NR-10                       #############
+##########################################################################
 
 # get month list
 def get_months(for_keyboard=False):
@@ -147,7 +150,9 @@ def choose_day(update, context):
     choose_month(update, context)
     return DAY
 
-
+##########################################################################
+###########   Insert Data NR-22(Found inside the function)   #############
+##########################################################################
 def choose_hour(update, context):
     hours = get_hours()
     if update.message.text in hours:
@@ -200,6 +205,9 @@ def cancel(update, context):
     update.message.reply_text("Cancelling...", reply_markup=ReplyKeyboardMarkup(base.main_menu, resize_keyboard=True))
     return ConversationHandler.END
 
+##########################################################################
+###########   Add the user to waitlist NR-21                 #############
+##########################################################################
 
 def subscribe_user_to_waiting_list(context, user_id):
     chosen_day = date(YEAR, int(context.user_data['month']), int(context.user_data['day']))

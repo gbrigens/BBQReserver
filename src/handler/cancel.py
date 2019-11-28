@@ -31,7 +31,9 @@ def choose_reservation(update, context):
     )
     return CHOOSE
 
-
+##########################################################################
+###########          Delete Data DD-10                       #############
+##########################################################################
 def delete_reservation(update, context):
     if update.message.text.isnumeric():
         num = int(update.message.text)
@@ -52,6 +54,10 @@ def delete_reservation(update, context):
     choose_reservation(update, context)
     return CHOOSE
 
+
+##########################################################################
+##########  Send Notification to waiting list users SN-20    #############
+##########################################################################
 def notify_awaiting_users(context, users):
     for user in users:
         response = "One user cancelled the reservation on `" + user.day.strftime('%Y-%m-%d') + "`"
@@ -66,6 +72,9 @@ def cancel(update, context):
     update.message.reply_text("Back to the main menu we go...", reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
     return ConversationHandler.END
 
+##########################################################################
+###########   Cancel reservation CR-10                       #############
+##########################################################################
 
 #ConversationHandler to cancel reservations
 cancel_reserve_conv_handler = ConversationHandler(
