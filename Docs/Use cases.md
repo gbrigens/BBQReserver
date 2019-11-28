@@ -114,7 +114,7 @@ User use cases
 
 -----------------------------------------------------------------------------------------------------------
 
-| **Extending use case name:** | Add the user to the waitlist |
+| **Extending use case name:** | Add the user to the waitlist [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/reserve.py#L204-L218)|
 | --- | --- |
 | **Extending use case ID:** | NR-21 |
 | **Description:** | The user is added to the waitlist to be notified if the time slot becomes free. |
@@ -133,7 +133,7 @@ User use cases
 
   
 
-| **Extending use case name:** | Insert data |
+| **Extending use case name:** | Insert data [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/reserve.py#L160-L166)|
 | --- | --- |
 | **Extending ID Number:** | NR-22 |
 | **Brief description:** | The selected time slot is reserved by the user. The bot inserts data about the new reservation to the database. |
@@ -152,7 +152,7 @@ User use cases
 
 ------------------------------------------------------------------------------------------------------------------
 
-| **Use Case Name:** | Delete Data |
+| **Use Case Name:** | Delete Data [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/cancel.py#L35-L53)|
 | --- | --- |
 | **Use Case ID:** | DD-10 |
 | **Primary Actors:** | Telegram Bot |
@@ -183,7 +183,7 @@ User use cases
   
 
 ---------------------------------------------------------------------------------------------------------
-| **Extending use case name:** | Send Notification to waiting list users |
+| **Extending use case name:** | Send Notification to waiting list users [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/cancel.py#L55-L63) |
 | --- | --- |
 | **Extending ID Number:** | SN-20 |
 | **Brief description:** | The bot checks if the waiting list has any user for sending notifications after the reservation was cancelled. If there is at least one user in the list - the bot sends notification |
@@ -196,7 +196,7 @@ User use cases
 | **Priority:** | High |
 
 ---------------------------------------------------------------------------------------------------------
-| **Use case name:** | Send list of the user&#39;s reservations |
+| **Use case name:** | Send list of the user&#39;s reservations [View Code]([View code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/view.py)|
 | --- | --- |
 | **Use Case ID:** | SL-10 |
 | **Primary Actors:** | Telegram bot |
@@ -214,7 +214,7 @@ User use cases
 
   
 
-| **Use case name:** | Request confirmation |
+| **Use case name:** | Request confirmation [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/helper.py#L9-L27) |
 | --- | --- |
 | **Use Case ID:** | RC-10 |
 | **Primary Actors:** | Telegram bot |
