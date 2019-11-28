@@ -7,6 +7,30 @@ The BBQ Reservation is a bot to replace the current system which is just a googl
 4. Subcribe to waitinglist if the day and time you were planning to book has already been booked.
 5. Notification : For example when you have subscribed to waiting list and the day and time is free you will be notify and you can book.
 
+## How to install
+### Requrements:
+- git module
+- Python 3.5 or higher
+- Python virtual environment module venv
+
+### Steps:
+1) Open terminal (or command line on Windows) and clone the repository
+git clone `https://github.com/gbrigens/BBQReserver.git`
+2) Open the `src` directory
+`cd src`
+3) Create python virtual environment using venv module to install dependencies
+`python3 -m venv env`
+4) Activate virtual environment
+On Linux: `source env/bin/activate`
+On Windows: `env/scripts/activate.bat`
+5) Install dependencies on requirements file `pip install -r requirements`
+5) run bot `python app.py`
+6) Find this bot to test it: `@testthisagain_bot`
+7) If you cannot run the bot locally, you can test the bot already running: `@InnoBBQbot`
+
+## How to test
+All tests are in `/src/tests` directory, to run the tests [check test readme file](https://github.com/gbrigens/BBQReserver/blob/master/src/tests/readme.md)
+
 # Short Video of how it works
 [<img src="https://www.luceysgoodfood.com/wp-content/uploads/2016/10/bbq_meats.jpg" height=300, width=450>](https://youtu.be/8kLkf7Gp8ZI)
 
@@ -50,25 +74,5 @@ The BBQ Reservation is a bot to replace the current system which is just a googl
 ## Notification reminder
 <img src="https://github.com/gbrigens/BBQReserver/blob/master/screenshot/reminder.png" height=600>
 
-## How to install
-## Requrements:
-- git module
-- Python 3.5 or higher
-- Python virtual environment module venv
-
-## Steps:
-1) Open terminal (or command line on Windows) and clone the repository
-git clone `https://github.com/gbrigens/BBQReserver.git`
-2) Open the src directory
-cd src
-3) Create python virtual environment using venv module to install dependencies
-python3 -m venv env
-4) Activate virtual environment
-On Linux: `source env/bin/activate`
-On Windows: `env/scripts/activate.bat`
-5) Install dependencies on requirements file `pip install -r requirements`
-5) run bot `python app.py`
-6) Find this bot to test it: `@testthisagain_bot`
-7) If you cannot run the bot locally, you can test the bot already running: `@InnoBBQbot`
 
 
