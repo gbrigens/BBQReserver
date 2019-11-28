@@ -63,7 +63,7 @@ User use cases
 
 ------------------------------------------------------------------------------------------------
   
-## Cancel reservation
+## Cancel reservation [View Code](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/cancel.py)
 | **Use Case Name:** | Cancel reservation |
 | --- | --- |
 | **Use Case ID:** | CR-10 |
