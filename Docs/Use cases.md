@@ -46,7 +46,8 @@ User use cases
 
   
   
-## Create reservation View code: https://github.com/gbrigens/BBQReserver/blob/master/src/handler/reserve.py
+## Create reservation 
+View code: [Link](https://github.com/gbrigens/BBQReserver/blob/master/src/handler/reserve.py)
 | **Use Case Name:** | Create reservation |
 | --- | --- |
 | **Use Case ID:** | NR-10 |
