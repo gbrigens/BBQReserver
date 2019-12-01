@@ -72,7 +72,7 @@
 | **TC-02-A3** | John Doe responds by selecting November. | **Pass** |   |
 | **TC-02-S4** | The telegram bot in turn provides a list of days from 24th to 30th for the remaining days of November so John Doe can select. | **Pass** |   |
 | **TC-02-A5** | John Doe selects 25th from the list. | **Pass** |   |
-| **TC-02-S6** | The telegram bot presents John Doe with the list of clock time from 8 AM to 10 PM in the interval of 2 hours for the 25th of November. | **Warning** | This serves as a warning as it is possible that John Doe already made a reservation on this day. |
+| **TC-03-S6** | The bot notices there are no slots for 25th December so it present option to John Doe to subscribe to waiting list. | **Pass** |   |
 | **TC-02-S7** | The telegram bot display the message&quot;You already have reservation on 2019-11-25, you should cancel previous reservation if you want to change.&quot; | **Pass** |   |
 | **Status:** | Pass |
 | **Tester:** | S. Kuznetsov |
