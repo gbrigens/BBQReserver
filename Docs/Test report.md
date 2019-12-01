@@ -93,8 +93,7 @@
 | **TC-03-A3** | John Doe responds by selecting November. | **Pass** |   |
 | **TC-03-S4** | The telegram bot in turn provides a list of days from 24th to 30th for the remaining days of November so John Doe can select. | **Pass** |   |
 | **TC-03-A5** | John Doe selects 25th from the list. | **Warning** | This serves as a warning as it is possible that John Doe already made a reservation on this day. |
-| **TC-03-S6** | The bot notices there are no slots for 25th December so it present option to John Doe to subscribe to waiting list. | **Pass** |   |
-| **TC-03-A7** | John Doe selects the Subscribe option. | **Pass** |   |
+| **TC-03-A6** | John Doe selects the Subscribe option. | **Pass** |   |
 | **TC-03-S8** | Bot subscribes John Doe to waiting list so as to notify him if there is any slot made available for 25th December. | **Pass** |   |
 | **Status:** | Pass |
 | **Tester:** | E. Timoshchuk |
